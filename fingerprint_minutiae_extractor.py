@@ -59,7 +59,6 @@ class FingerprintFeatureExtractor(object):
                 angle.append(float('nan'))
             return (angle)
         elif minutiaeType.lower() == 'dot':
-            ##TODO
             sumVal = 0
             for i in range(blkRows):
                 for j in range(blkCols):
@@ -155,7 +154,6 @@ class FingerprintFeatureExtractor(object):
             if(len(angle) == 3):
                 FeaturesBif.append(MinutiaeFeature(row, col, angle, 'Bifurcation'))
 
-        ##TODO
         FeaturesDot = []
         self.minutiaeDot = skimage.measure.label(self.minutiaeDot, connectivity=2)
         RP = skimage.measure.regionprops(np.uint8(self.minutiaeDot))
