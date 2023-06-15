@@ -14,6 +14,9 @@ files = os.listdir(folder_path)
 # sort the files based on the first number
 files.sort(key=lambda x: (int(x.split('_')[0]), x))
 
+enhanced_dir = "./enhanced/"
+if not os.path.exists(enhanced_dir):
+    os.mkdir(enhanced_dir)
 
 recognized_num_1 = 0
 recognized_num_2 = 0
@@ -29,19 +32,19 @@ for i, file in enumerate(tqdm.tqdm(files[5195:])):
     # enhance fingerprints
     image_enhancer = FingerprintImageEnhancer()         # create object called image_enhancer
 
-    # folder_path = './SOCOFing/Real/'
-    # img = cv2.imread(os.path.join(folder_path, file))
-    # if(len(img.shape)>2):                               # convert image into gray if necessary
-    #     img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    # out = image_enhancer.enhance(img)     # run image enhancer
-    # image_enhancer.save_enhanced_image('./enhanced/' + file)   # save output
+    folder_path = './SOCOFing/Real/'
+    img = cv2.imread(os.path.join(folder_path, file))
+    if(len(img.shape)>2):                               # convert image into gray if necessary
+        img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    out = image_enhancer.enhance(img)     # run image enhancer
+    image_enhancer.save_enhanced_image('./enhanced/' + file)   # save output
 
-    # folder_path = './compressed/'
-    # img = cv2.imread(os.path.join(folder_path, file))
-    # if(len(img.shape)>2):                               # convert image into gray if necessary
-    #     img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    # out = image_enhancer.enhance(img)     # run image enhancer
-    # image_enhancer.save_enhanced_image('./compressed_enhanced/' + file)   # save output
+    folder_path = './compressed/'
+    img = cv2.imread(os.path.join(folder_path, file))
+    if(len(img.shape)>2):                               # convert image into gray if necessary
+        img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    out = image_enhancer.enhance(img)     # run image enhancer
+    image_enhancer.save_enhanced_image('./compressed_enhanced/' + file)   # save output
 
 
     # extract features from enhanced fingerprints
@@ -63,7 +66,7 @@ for i, file in enumerate(tqdm.tqdm(files[5195:])):
     stacked_img = np.stack((img_1,)*3, axis=-1)
     
 
-     try:
+    try:
         detect_SP_1 = fingerprint_singular_extractor.walking(img_1)
     except:
         num_of_errors += 1
