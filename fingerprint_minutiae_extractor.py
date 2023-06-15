@@ -280,7 +280,7 @@ def extract_minutiae_features(img, img_name, spuriousMinutiaeThresh=10, invertIm
 def calculate_score(features_1, features_2):
     if len(features_1) == 0 and len(features_2) == 0:
         return 0, 0
-
+    
     total_match = 0
     matches = set()
 
