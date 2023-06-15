@@ -15,14 +15,16 @@ files = os.listdir(folder_path)
 files.sort(key=lambda x: (int(x.split('_')[0]), x))
 
 
-recognized_num = 0
+recognized_num_1 = 0
+recognized_num_2 = 0
+recognized_num_3 = 0
+recognized_num_4 = 0
+recognized_num_5 = 0
+recognized_num_6 = 0
+recognized_num_7 = 0
+total_score = 0
 # iterate over the last 1000 files
 for i, file in enumerate(tqdm.tqdm(files[5000:])):
-    # compress fingerprints
-    img = cv2.imread(os.path.join(folder_path, file))
-    # save it to './compressed/'
-    
-
     # enhance fingerprints
     image_enhancer = FingerprintImageEnhancer()         # create object called image_enhancer
 
@@ -98,29 +100,50 @@ for i, file in enumerate(tqdm.tqdm(files[5000:])):
     # print(detect_SP_2)
 
 
-    pattern_1 = fingerprint_singular_extractor.classify_fingerprint_pattern(detect_SP_1)
-    pattern_2 = fingerprint_singular_extractor.classify_fingerprint_pattern(detect_SP_2)
+    # pattern_1 = fingerprint_singular_extractor.classify_fingerprint_pattern(detect_SP_1)
+    # pattern_2 = fingerprint_singular_extractor.classify_fingerprint_pattern(detect_SP_2)
 
-    if pattern_1 != 'None' and pattern_2 != 'None' and pattern_1 == pattern_2:
-        pattern = pattern_1
+    # if pattern_1 != 'None' and pattern_2 != 'None' and pattern_1 == pattern_2:
+    #     pattern = pattern_1
 
     singular_match, singular_total = fingerprint_singular_extractor.calculate_score(detect_SP_1, detect_SP_2, 2)
 
     total_match = term_match + bif_match + dot_match + singular_match
     total_points = term_total + bif_total + dot_total + singular_total
 
-    threshold = 0.9
+    threshold_1 = 0.5
+    threshold_2 = 0.55
+    threshold_3 = 0.6
+    threshold_4 = 0.65
+    threshold_5 = 0.7
+    threshold_6 = 0.75
+    threshold_7 = 0.8
     score = total_match / total_points
+    print(score)
 
-    if score >= threshold:
-        recognized_num += 1
-        # print("Passed.")
-    else:
-        # print("Failed.")
-        pass
+    if score >= threshold_1:
+        recognized_num_1 += 1
+    if score >= threshold_2:
+        recognized_num_2 += 1
+    if score >= threshold_3:
+        recognized_num_3 += 1
+    if score >= threshold_4:
+        recognized_num_4 += 1
+    if score >= threshold_5:
+        recognized_num_5 += 1
+    if score >= threshold_6:
+        recognized_num_6 += 1
+    if score >= threshold_7:
+        recognized_num_7 += 1
 
-    recognized_num += 1
+    total_score += score
 
-print('Recognized amount:', recognized_num)
-
+print('Recognized amount:', recognized_num_1)
+print('Recognized amount:', recognized_num_2)
+print('Recognized amount:', recognized_num_3)
+print('Recognized amount:', recognized_num_4)
+print('Recognized amount:', recognized_num_5)
+print('Recognized amount:', recognized_num_6)
+print('Recognized amount:', recognized_num_7)
+print(total_score/1000)
 
