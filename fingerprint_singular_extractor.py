@@ -332,7 +332,7 @@ def calculate_score(sp1, sp2, tolerance):
     deltas2 = sp2.get('delta', [])
     
     if len(cores1) == 0 and len(cores2) == 0 and len(deltas1) == 0 and len(deltas2) == 0:
-        return 1
+        return 0, 0
 
     total_match = 0
     matches = set()
