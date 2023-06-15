@@ -18,6 +18,10 @@ enhanced_dir = "./enhanced/"
 if not os.path.exists(enhanced_dir):
     os.mkdir(enhanced_dir)
 
+compressed_enhanced_dir = "./compressed_enhanced/"
+if not os.path.exists(compressed_enhanced_dir):
+    os.mkdir(compressed_enhanced_dir)
+
 recognized_num_1 = 0
 recognized_num_2 = 0
 recognized_num_3 = 0
@@ -28,7 +32,8 @@ recognized_num_7 = 0
 total_score = 0
 num_of_errors = 0
 # iterate over the last 1000 files
-for i, file in enumerate(tqdm.tqdm(files[5195:])):
+# for i, file in enumerate(tqdm.tqdm(files[5195:])):
+for i, file in enumerate(tqdm.tqdm(files)):
     # enhance fingerprints
     image_enhancer = FingerprintImageEnhancer()         # create object called image_enhancer
 
