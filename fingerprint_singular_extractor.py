@@ -216,8 +216,8 @@ def walking(img):
     blksze = 16
     thresh = 0.3
     normim, mask = ridge_segment(img,blksze,thresh);    
-    mask[(mask.shape[0]//blksze)*blksze+1:mask.shape[0],:] = 0
-    mask[:,(mask.shape[1]//blksze)*blksze+1:mask.shape[1]] = 0
+    mask[(mask.shape[0]//blksze)*blksze:mask.shape[0],:] = 0
+    mask[:,(mask.shape[1]//blksze)*blksze:mask.shape[1]] = 0
 
 
     orientim = ridge_orient(normim, 1, 3, 3)
